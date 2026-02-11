@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Mode - El Colorado / VIK Wine Inspired */
+    --bg-main: #ffffff;
+    --bg-sec: #f8f9fa;
+    --text-main: #1a1a1a;
+    --text-sec: #4a4a4a;
+    --accent: #003366; /* Deep Blue from El Colorado */
+    --accent-hover: #002244;
+    --border: #e5e7eb;
+    --card-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
+  }
+
+  [data-theme='dark'] {
+    /* Dark Mode - Bandai Namco Inspired */
+    --bg-main: #000000;
+    --bg-sec: #111111;
+    --text-main: #ffffff;
+    --text-sec: #a0a0a0;
+    --accent: #ff6b00; /* Bandai Orange */
+    --accent-hover: #e65100;
+    --border: #333333;
+    --card-shadow: 0 0 30px rgba(255, 107, 0, 0.1);
+  }
+
+  body {
+    @apply transition-colors duration-500;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    @apply tracking-tight;
+  }
+
+  [data-theme='dark'] h1, 
+  [data-theme='dark'] h2, 
+  [data-theme='dark'] h3 {
+    @apply font-black uppercase italic tracking-tighter;
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary-theme {
+    @apply px-8 py-4 font-bold transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-widest text-sm;
+    background-color: var(--accent);
+    color: white;
+  }
+
+  .btn-primary-theme:hover {
+    background-color: var(--accent-hover);
+    @apply transform -translate-y-0.5 shadow-lg;
+  }
+
+  [data-theme='dark'] .btn-primary-theme {
+    @apply rounded-none;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+  }
+
+  .card-theme {
+    @apply transition-all duration-500 overflow-hidden border;
+    background-color: var(--bg-main);
+    border-color: var(--border);
+    box-shadow: var(--card-shadow);
+  }
+
+  [data-theme='dark'] .card-theme {
+    @apply border-2;
+  }
+}
+
+#root {
+  width: 100%;
+}
