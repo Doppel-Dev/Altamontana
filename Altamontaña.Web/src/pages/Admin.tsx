@@ -8,11 +8,8 @@ import {
 import { Experience } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Save, RefreshCw, Image as ImageIcon, Type, DollarSign, 
-  MapPin, Clock, Upload, Shield, Eye, EyeOff, Mail, 
-  User, Lock, Plus, Trash2, Home, HelpCircle, MessageSquare, List, Layout, Languages, Sparkles
-} from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+  Save, RefreshCw, Upload, Shield, Eye, Plus, Trash2, Home, HelpCircle, MessageSquare, List, Layout, Languages, Sparkles 
+} from 'lucide-react';import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 
 type TabType = 'inicio' | 'vuelos' | 'faq' | 'contacto' | 'footer' | 'seguridad';
@@ -208,7 +205,7 @@ const Admin = () => {
 
   const handleSyncHomeFeatures = async () => {
     const featKeys = [
-      { key: 'home_hero_btn', val: JSON.stringify({ es: 'Ver Vuelos', en: 'View Flights', pt: 'Ver Voos' }) },
+      { key: 'home_hero_btn', val: JSON.stringify({ es: 'Ver Experiencias', en: 'View Experiences', pt: 'Ver Experiências' }) },
       { key: 'home_feat1_title', val: JSON.stringify({ es: 'Flota Moderna', en: 'Modern Fleet', pt: 'Frota Moderna' }) },
       { key: 'home_feat1_desc', val: JSON.stringify({ es: 'Aeronaves Airbus y Bell...', en: 'Airbus and Bell...', pt: 'Aeronaves Airbus...' }) },
       { key: 'home_feat2_title', val: JSON.stringify({ es: 'Pilotos Expertos', en: 'Expert Pilots', pt: 'Pilotos Especialistas' }) },
@@ -227,7 +224,7 @@ const Admin = () => {
 
   const handleSyncCatalog = async () => {
     const catalogKeys = [
-      { key: 'catalog_title', val: JSON.stringify({ es: 'Misiones Activas', en: 'Active Missions', pt: 'Missões Ativas' }) },
+      { key: 'catalog_title', val: JSON.stringify({ es: 'Nuestras Experiencias', en: 'Our Experiences', pt: 'Nossas Experiências' }) },
       { key: 'catalog_sub', val: JSON.stringify({ es: 'Catálogo de Expediciones', en: 'Expedition Catalog', pt: 'Catálogo de Expedições' }) }
     ];
     for (const item of catalogKeys) {
@@ -250,7 +247,7 @@ const Admin = () => {
 
   const tabs = [
     { id: 'inicio', label: 'Inicio', icon: Home },
-    { id: 'vuelos', label: 'Vuelos', icon: List },
+    { id: 'vuelos', label: 'Experiencias', icon: List },
     { id: 'faq', label: 'FAQ', icon: HelpCircle },
     { id: 'contacto', label: 'Contacto', icon: MessageSquare },
     { id: 'footer', label: 'Footer', icon: Layout },

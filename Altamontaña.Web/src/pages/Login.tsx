@@ -43,13 +43,13 @@ const Login = () => {
           <div className={`inline-flex p-4 rounded-full mb-6 ${isDark ? 'bg-[#ff6b00]/10 text-[#ff6b00]' : 'bg-[#003366]/10 text-[#003366]'}`}>
             <Lock size={32} />
           </div>
-          <h1 className="text-3xl font-black italic uppercase tracking-tighter">Acceso Restringido</h1>
-          <p className="text-xs font-bold opacity-50 uppercase tracking-widest mt-2">Personal Autorizado Solamente</p>
+          <h1 className={isDark ? 'heading-h2-dark' : 'heading-h2-light'}>Acceso Restringido</h1>
+          <p className="label-base text-muted mt-2">Personal Autorizado Solamente</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2">
+            <label className="label-tiny text-muted flex items-center gap-2">
               <User size={12} /> Usuario
             </label>
             <input 
@@ -62,7 +62,7 @@ const Login = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-bold uppercase tracking-widest opacity-40 flex items-center gap-2">
+            <label className="label-tiny text-muted flex items-center gap-2">
               <Lock size={12} /> Contraseña
             </label>
             <div className="relative group">
@@ -87,7 +87,7 @@ const Login = () => {
             <motion.div 
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
-              className="flex items-center gap-2 text-red-500 text-xs font-bold uppercase bg-red-500/10 p-4 border-l-4 border-red-500"
+              className="flex items-center gap-2 text-red-500 label-base bg-red-500/10 p-4 border-l-4 border-red-500"
             >
               <AlertCircle size={16} />
               {error}
@@ -97,8 +97,8 @@ const Login = () => {
           <button 
             type="submit" 
             disabled={loading}
-            className={`w-full py-5 flex items-center justify-center gap-3 font-black uppercase italic transition-all active:scale-95 mt-4 ${
-              isDark ? 'bg-[#ff6b00] text-black hover:bg-white' : 'bg-[#003366] text-white hover:bg-slate-800'
+            className={`w-full py-5 flex items-center justify-center gap-3 btn-text-base transition-all active:scale-95 mt-4 ${
+              isDark ? 'bg-[#ff6b00] text-black hover:bg-white italic' : 'bg-[#003366] text-white hover:bg-slate-800'
             } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {loading ? <Loader2 className="animate-spin" /> : 'IDENTIFICARSE'}
