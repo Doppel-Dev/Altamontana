@@ -4,8 +4,16 @@ import { useLanguage } from '../context/LanguageContext';
 import { useState, useEffect } from 'react';
 import { getExperiences, getSiteContent } from '../services/api';
 import { Experience } from '../types';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react';
 import { ExperienceCard } from '../components/ExperienceCard';
+import {
+  Carousel,
+  Slider,
+  SliderContainer,
+  SliderDotButton,
+  SliderNextButton,
+  SliderPrevButton,
+} from '../components/ui/carousel';
 
 const Experiences = () => {
   const { theme } = useTheme();
@@ -14,23 +22,8 @@ const Experiences = () => {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [siteContent, setSiteContent] = useState<any>({});
   const [loading, setLoading] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsToShow, setItemsToShow] = useState(3);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setItemsToShow(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsToShow(2);
-      } else {
-        setItemsToShow(3);
-      }
-    };
-    
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    
     Promise.all([
       getExperiences(),
       getSiteContent()
@@ -43,87 +36,95 @@ const Experiences = () => {
       setSiteContent(contentMap);
       setLoading(false);
     });
-
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const nextSlide = () => {
-    if (currentIndex < experiences.length - itemsToShow) {
-      setCurrentIndex(prev => prev + 1);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1);
-    }
-  };
-
   if (loading) return (
-    <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
-      <div className="eyebrow-dark animate-pulse">{t('syncCatalog')}</div>
+    <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-[#050505] text-white' : 'bg-white text-black'}`}>
+      <div className="flex flex-col items-center gap-8">
+        <div className={`w-20 h-[1px] ${isDark ? 'bg-[#ff6b00]' : 'bg-[#003366]'} animate-pulse`} />
+        <div className="text-[10px] font-black uppercase tracking-[0.5em] animate-pulse">{t('syncCatalog')}</div>
+      </div>
     </div>
   );
 
-  const showCarousel = experiences.length > itemsToShow;
-
   return (
-    <div className={`min-h-screen pt-32 md:pt-40 pb-24 transition-colors duration-500 ${isDark ? 'bg-black text-white' : 'bg-slate-50 text-slate-900'}`}>
-      <div className="section-container">
-        <header className="mb-12 md:mb-20">
-          <h1 className={`mb-4 md:mb-6 ${isDark ? 'heading-h1-dark' : 'heading-h1-light text-[#003366]'}`}>
-            {t(siteContent.catalog_title || 'catalogTitleDark')}
-          </h1>
-          <p className="body-large text-muted uppercase italic">
-            {t(siteContent.catalog_sub || 'catalogSub')}
-          </p>
+    <div className={`min-h-screen pt-40 md:pt-48 pb-32 relative overflow-hidden transition-colors duration-700 ${isDark ? 'bg-[#050505] text-white' : 'bg-[#fafafa] text-slate-900'}`}>
+      {/* Background Texture Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+      <div className="section-container relative z-10">
+        <header className="mb-24 md:mb-32 max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="flex items-center gap-4 mb-8">
+              <div className={`w-12 h-[1px] ${isDark ? 'bg-[#ff6b00]' : 'bg-[#003366]'}`} />
+              <span className={`text-[10px] font-black uppercase tracking-[0.4em] ${isDark ? 'text-[#ff6b00]' : 'text-[#003366]'}`}>
+                {t('curatedExpeditions')}
+              </span>
+            </div>
+            
+            <h1 className={`mb-10 leading-[0.85] tracking-tighter ${
+              isDark 
+                ? 'text-[clamp(3.5rem,12vw,9rem)] font-black italic uppercase italic' 
+                : 'text-[clamp(3rem,8vw,7rem)] font-serif font-bold text-[#003366]'
+            }`}>
+              {t(siteContent.catalog_title || 'catalogTitleDark')}
+            </h1>
+
+            <p className={`body-large max-w-2xl opacity-60 font-light leading-relaxed ${isDark ? 'text-white' : 'text-slate-600'}`}>
+              {t(siteContent.catalog_sub || 'catalogSub')}
+            </p>
+          </motion.div>
         </header>
 
-        <div className="relative">
-          {showCarousel && (
-            <div className="flex justify-end gap-4 mb-8 md:absolute md:-top-16 md:right-0 z-20">
-              <button 
-                onClick={prevSlide}
-                disabled={currentIndex === 0}
-                className={`p-3 rounded-full border-2 transition-all ${
-                  currentIndex === 0 
-                    ? 'opacity-10 cursor-not-allowed' 
-                    : (isDark ? 'border-white text-white hover:bg-[#ff6b00]' : 'border-[#003366] text-[#003366] hover:bg-[#003366] hover:text-white')
-                }`}
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button 
-                onClick={nextSlide}
-                disabled={currentIndex >= experiences.length - itemsToShow}
-                className={`p-3 rounded-full border-2 transition-all ${
-                  currentIndex >= experiences.length - itemsToShow
-                    ? 'opacity-10 cursor-not-allowed' 
-                    : (isDark ? 'border-white text-white hover:bg-[#ff6b00]' : 'border-[#003366] text-[#003366] hover:bg-[#003366] hover:text-white')
-                }`}
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          )}
+        <div className="relative group/carousel">
+          <Carousel options={{ align: 'start', loop: false }}>
+            <div className="flex items-center justify-between mb-12 border-b border-current border-opacity-5 pb-8">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2 opacity-40">
+                  <LayoutGrid size={16} />
+                  <span className="text-[10px] font-black uppercase tracking-widest">MISSION SELECTION</span>
+                </div>
+                <div className="h-4 w-[1px] bg-current opacity-10" />
+                <span className="text-[10px] font-mono opacity-40">{experiences.length} AVAILABLE</span>
+              </div>
 
-          <div className="overflow-hidden px-1">
-            <motion.div 
-              animate={{ x: showCarousel ? `-${currentIndex * (100 / itemsToShow)}%` : 0 }}
-              transition={{ type: "spring", stiffness: 200, damping: 25 }}
-              className={`flex ${showCarousel ? '' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'}`}
-            >
+              <div className="flex gap-4">
+                <SliderPrevButton className={`p-4 transition-all hover:scale-110 disabled:opacity-10 disabled:cursor-not-allowed`}>
+                  <ChevronLeft size={24} className={isDark ? 'text-white' : 'text-[#003366]'} />
+                </SliderPrevButton>
+                <SliderNextButton className={`p-4 transition-all hover:scale-110 disabled:opacity-10 disabled:cursor-not-allowed`}>
+                  <ChevronRight size={24} className={isDark ? 'text-white' : 'text-[#003366]'} />
+                </SliderNextButton>
+              </div>
+            </div>
+
+            <SliderContainer className="cursor-grab active:cursor-grabbing">
               {experiences.map((exp) => (
-                <ExperienceCard 
-                  key={exp.id} 
-                  exp={exp} 
-                  isDark={isDark} 
-                  className={showCarousel ? (itemsToShow === 1 ? 'w-full' : itemsToShow === 2 ? 'w-1/2' : 'w-1/3') : 'w-full'}
-                />
+                <Slider key={exp.id} className="sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-4">
+                  <ExperienceCard 
+                    exp={exp} 
+                    isDark={isDark} 
+                  />
+                </Slider>
               ))}
-            </motion.div>
-          </div>
+            </SliderContainer>
+
+            <div className="mt-16 flex justify-center">
+              <div className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'}>
+                <SliderDotButton />
+              </div>
+            </div>
+          </Carousel>
         </div>
+      </div>
+
+      {/* Decorative Sidebar Label */}
+      <div className="hidden lg:block absolute right-12 top-1/2 -rotate-90 origin-right translate-y-1/2">
+        <span className="text-[10px] font-black uppercase tracking-[1em] opacity-5">ALTAMONTAÑA HELI-EXPERIENCES</span>
       </div>
     </div>
   );

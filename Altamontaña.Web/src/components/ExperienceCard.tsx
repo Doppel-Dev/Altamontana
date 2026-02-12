@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { MapPin, Clock, ArrowRight, Crosshair } from 'lucide-react';
+import { MapPin, Clock, ArrowRight, Crosshair, Shield } from 'lucide-react';
 import { Experience } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -15,114 +15,115 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({ exp, isDark, cla
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ y: -5 }}
       className={`${className} group relative`}
     >
-      {/* Technical Border Effect (Dark Mode only) */}
-      {isDark && (
-        <div className="absolute -inset-[1px] bg-gradient-to-br from-white/10 via-transparent to-[#ff6b00]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[1px]" />
-      )}
+      {/* Background Texture Overlay (Subtle) */}
+      <div className="absolute inset-0 pointer-events-none z-10 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       <div className={`relative h-full flex flex-col transition-all duration-700 overflow-hidden ${
         isDark 
-          ? 'bg-[#050505] border border-white/5' 
-          : 'bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-slate-100'
+          ? 'bg-[#0a0a0a] border border-white/5' 
+          : 'bg-white shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-slate-100'
       }`}>
-        {/* Image Container - Switched to Aspect Video for compactness */}
-        <div className="relative aspect-video overflow-hidden">
-          {/* Grain Texture Overlay */}
-          <div className="absolute inset-0 z-10 opacity-[0.15] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] bg-repeat" />
+        {/* Image Container */}
+        <div className="relative aspect-[16/10] overflow-hidden">
+          {/* Overlay for depth */}
+          <div className={`absolute inset-0 z-10 transition-opacity duration-700 ${
+            isDark ? 'bg-black/20 group-hover:opacity-0' : 'bg-transparent'
+          }`} />
           
           <img 
             src={exp.imageUrl} 
             alt={exp.title} 
-            className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" 
+            className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
+              isDark ? 'grayscale group-hover:grayscale-0' : ''
+            }`} 
           />
 
-          {/* Technical Badge (Top Left) */}
-          <div className="absolute top-3 left-3 z-20">
-            <div className={`px-2.5 py-1.5 text-[9px] font-mono tracking-widest uppercase flex items-center gap-2 backdrop-blur-md transition-colors duration-500 ${
+          {/* Location Badge (Floating) */}
+          <div className="absolute bottom-4 left-4 z-20">
+            <div className={`px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] backdrop-blur-md border ${
               isDark 
-                ? 'bg-black/60 text-white/70 group-hover:text-[#ff6b00] border border-white/10' 
-                : 'bg-white/90 text-[#003366]/70 group-hover:text-[#003366] border border-black/5 shadow-sm'
+                ? 'bg-black/60 text-white border-white/10' 
+                : 'bg-white/90 text-[#003366] border-black/5'
             }`}>
-              <Crosshair size={10} className="animate-pulse" />
-              {t('mission')}: {String(exp.id).padStart(3, '0')}
+              {t(exp.location).split(',')[0]}
             </div>
           </div>
 
-          {/* Price Badge (Top Right) - Improved Contrast with Glassmorphism */}
-          <div className="absolute top-3 right-3 z-20">
-            <div className={`px-3 py-1.5 backdrop-blur-md border flex flex-col items-end transition-all duration-500 ${
+          {/* Price Tag - Technical Style */}
+          <div className="absolute top-0 right-0 z-20">
+            <div className={`p-6 backdrop-blur-xl border-l border-b flex flex-col items-end transition-all duration-500 ${
               isDark 
-                ? 'bg-black/40 border-white/10' 
-                : 'bg-white/80 border-black/5 shadow-sm'
+                ? 'bg-[#ff6b00] border-white/10 text-black' 
+                : 'bg-[#003366] border-black/5 text-white shadow-lg'
             }`}>
-              <span className={`text-[9px] font-bold tracking-[0.2em] opacity-80 ${isDark ? 'text-white/60' : 'text-[#003366]/60'}`}>
-                {t('price')}
+              <span className="text-[8px] font-black tracking-[0.3em] uppercase opacity-70 mb-1">
+                {t('from')}
               </span>
-              <div className={`text-xl font-black italic tracking-tighter ${isDark ? 'text-[#ff6b00]' : 'text-[#003366]'}`}>
-                ${exp.price} <span className="text-[10px] not-italic opacity-60">USD</span>
+              <div className="text-2xl font-black italic tracking-tighter">
+                ${exp.price}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Content Container - More compact padding */}
-        <div className="p-6 md:p-8 flex-grow flex flex-col relative">
-          <div className="flex gap-4 label-base text-muted font-mono mb-4">
-            <span className="flex items-center gap-1.5 text-[11px] font-bold">
-              <MapPin size={12} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} /> 
-              {t(exp.location).split(',')[0]}
-            </span>
-            <span className="flex items-center gap-1.5 text-[11px] font-bold">
-              <Clock size={12} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} /> 
-              {t(exp.duration)}
-            </span>
+        {/* Content Container */}
+        <div className="p-8 flex-grow flex flex-col relative">
+          {/* Technical Info Row */}
+          <div className="flex items-center gap-6 mb-6 opacity-40">
+            <div className="flex items-center gap-2">
+              <Crosshair size={12} />
+              <span className="text-[10px] font-mono font-bold tracking-widest uppercase">ID: {String(exp.id).padStart(3, '0')}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock size={12} />
+              <span className="text-[10px] font-mono font-bold tracking-widest uppercase">{exp.duration}</span>
+            </div>
           </div>
           
-          {/* Fixed height for title to ensure alignment */}
-          <div className="min-h-[3.5rem] flex items-start mb-8">
-            <h3 className={`leading-tight ${
-              isDark 
-                ? 'text-white font-bold italic uppercase text-xl tracking-tighter' 
-                : 'text-[#003366] font-serif text-2xl font-bold tracking-tight'
-            }`}>
-              {t(exp.title)}
-            </h3>
-          </div>
+          {/* Title - Different styles for themes */}
+          <h3 className={`mb-8 leading-[1.1] ${
+            isDark 
+              ? 'text-white font-black italic uppercase text-2xl tracking-tighter' 
+              : 'text-[#003366] font-serif text-3xl font-bold tracking-tight'
+          }`}>
+            {t(exp.title)}
+          </h3>
 
-          {/* Card Footer - Refined Button Design */}
-          <div className="mt-auto pt-6 border-t border-current border-opacity-10">
+          <p className={`mb-10 text-sm leading-relaxed line-clamp-2 ${
+            isDark ? 'text-white/50' : 'text-slate-500'
+          }`}>
+            {t(exp.description)}
+          </p>
+
+          {/* Action Row */}
+          <div className="mt-auto pt-8 border-t border-current border-opacity-5 flex items-center justify-between">
             <Link 
               to={`/experience/${exp.id}`}
-              className={`group/btn relative w-full py-4 px-6 flex items-center justify-between overflow-hidden transition-all duration-500 ${
-                isDark 
-                  ? 'bg-white text-black hover:bg-[#ff6b00]' 
-                  : 'bg-[#003366] text-white hover:bg-[#004488]'
+              className={`group/btn relative flex items-center gap-4 transition-all duration-500 ${
+                isDark ? 'text-[#ff6b00]' : 'text-[#003366]'
               }`}
             >
-              <span className="relative z-10 text-[11px] font-black uppercase tracking-[0.2em]">
-                {t('viewDetails')}
+              <span className="text-[10px] font-black uppercase tracking-[0.3em]">
+                {t('exploreMission')}
               </span>
-              
-              <div className="relative z-10 flex items-center gap-2">
-                <div className={`w-8 h-[1px] transition-all duration-500 group-hover/btn:w-12 ${
-                  isDark ? 'bg-black' : 'bg-white'
-                }`} />
-                <ArrowRight size={16} />
-              </div>
-
-              {/* Subtle Overlay for depth */}
-              <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-10 transition-opacity bg-white pointer-events-none" />
+              <div className={`w-8 h-[1px] bg-current transition-all duration-500 group-hover/btn:w-16`} />
+              <ArrowRight size={16} className="-ml-2 transition-transform duration-500 group-hover/btn:translate-x-2" />
             </Link>
+
+            <div className="flex items-center gap-2 opacity-20">
+              <Shield size={14} />
+              <span className="text-[8px] font-black uppercase tracking-widest">SECURE</span>
+            </div>
           </div>
         </div>
       </div>
     </motion.div>
   );
 };
+
 
