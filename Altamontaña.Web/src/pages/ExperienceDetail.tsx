@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getExperience } from '../services/api';
 import { Experience } from '../types';
 import { motion } from 'framer-motion';
-import { Clock, Shield, Users, Zap, Check, ArrowLeft, Calendar, MapPin, Share2, Heart, Info, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Clock, Shield, Users, ArrowLeft, MapPin, Info, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import LoadingScreen from '../components/LoadingScreen';

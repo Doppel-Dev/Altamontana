@@ -8,11 +8,8 @@ import {
 import { Experience } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Save, RefreshCw, Image as ImageIcon, Type, DollarSign, 
-  MapPin, Clock, Upload, Shield, Eye, EyeOff, Mail, 
-  User, Lock, Plus, Trash2, Home, HelpCircle, MessageSquare, List, Layout, Languages, Sparkles
-} from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+  Save, RefreshCw, Upload, Shield, Eye, Plus, Trash2, Home, HelpCircle, MessageSquare, List, Layout, Languages, Sparkles 
+} from 'lucide-react';import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 
 type TabType = 'inicio' | 'vuelos' | 'faq' | 'contacto' | 'footer' | 'seguridad';

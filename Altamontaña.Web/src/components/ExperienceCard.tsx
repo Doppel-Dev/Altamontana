@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { MapPin, Clock, ArrowRight, Crosshair, Shield } from 'lucide-react';
+import { Clock, ArrowRight, Crosshair, Shield } from 'lucide-react';
 import { Experience } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 

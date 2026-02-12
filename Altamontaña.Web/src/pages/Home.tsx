@@ -49,10 +49,6 @@ const Home = () => {
     });
   }, []);
 
-  const heroTitle = isDark 
-    ? t(content.home_hero_title_dark || 'heroTitleDark')
-    : t(content.home_hero_title_light || 'heroTitleLight');
-    
   const heroImg = isDark
     ? (content.home_hero_img_dark || "/img/richard-felix-Y79GKs-dwz4-unsplash.jpg")
     : (content.home_hero_img_light || "/img/oliver-bornhauser-KnS5l6TZjAs-unsplash.jpg");
@@ -77,7 +73,9 @@ const Home = () => {
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ 
               opacity: 1, 
-              scale: 1,
+              scale: 1
+            }}
+            style={{
               x: springX,
               y: springY 
             }}
@@ -105,7 +103,9 @@ const Home = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ 
               y: 0, 
-              opacity: 1,
+              opacity: 1
+            }}
+            style={{
               x: contentX,
               y: contentY
             }}
@@ -371,7 +371,7 @@ const Home = () => {
           </header>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {experiences.map((exp, index) => (
+            {experiences.map((exp) => (
               <ExperienceCard 
                 key={exp.id} 
                 exp={exp} 
