@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -33,7 +33,7 @@
     @apply transition-colors duration-500;
     background-color: var(--bg-main);
     color: var(--text-main);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
   }
@@ -43,11 +43,11 @@
     @apply tracking-tight;
   }
 
-  [data-theme='dark'] h1, 
-  [data-theme='dark'] h2, 
+  [data-theme='dark'] h1,
+  [data-theme='dark'] h2,
   [data-theme='dark'] h3 {
     @apply font-black uppercase italic tracking-tighter;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 }
 
@@ -81,6 +81,321 @@
 
   [data-theme='dark'] .card-theme {
     @apply border-2;
+  }
+
+  /* ============================================
+     SISTEMA TIPOGRÁFICO PROFESIONAL
+     ============================================ */
+
+  /* Display Headings (Hero Titles) */
+  .heading-display-light {
+    @apply font-serif text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight;
+  }
+
+  .heading-display-dark {
+    @apply font-sans text-5xl md:text-6xl lg:text-7xl font-black uppercase italic tracking-tighter leading-none;
+  }
+
+  /* H1 Headings (Page Titles) */
+  .heading-h1-light {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
+  }
+
+  .heading-h1-dark {
+    @apply font-sans text-4xl md:text-5xl lg:text-6xl font-black uppercase italic tracking-tighter leading-tight;
+  }
+
+  /* H2 Headings (Section Titles) */
+  .heading-h2-light {
+    @apply font-serif text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-snug;
+  }
+
+  .heading-h2-dark {
+    @apply font-sans text-3xl md:text-4xl lg:text-5xl font-black uppercase italic tracking-tighter leading-snug;
+  }
+
+  /* H3 Headings (Card/Component Titles) */
+  .heading-h3-light {
+    @apply font-serif text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight leading-snug;
+  }
+
+  .heading-h3-dark {
+    @apply font-sans text-2xl md:text-3xl lg:text-4xl font-extrabold uppercase italic tracking-tight leading-snug;
+  }
+
+  /* H4 Headings (Subsection Titles) */
+  .heading-h4-light {
+    @apply font-serif text-xl md:text-2xl font-semibold tracking-normal leading-normal;
+  }
+
+  .heading-h4-dark {
+    @apply font-sans text-xl md:text-2xl font-bold uppercase italic tracking-normal leading-normal;
+  }
+
+  /* Body Text */
+  .body-large {
+    @apply text-lg font-normal leading-relaxed tracking-normal;
+  }
+
+  .body-base {
+    @apply text-base font-normal leading-normal tracking-normal;
+  }
+
+  .body-small {
+    @apply text-sm font-normal leading-snug tracking-normal;
+  }
+
+  /* Labels (Metadata, Categories) */
+  .label-large {
+    @apply text-sm font-semibold tracking-wide uppercase;
+  }
+
+  .label-base {
+    @apply text-xs font-semibold tracking-wider uppercase;
+  }
+
+  .label-small {
+    @apply text-[11px] font-semibold tracking-widest uppercase;
+  }
+
+  .label-tiny {
+    font-size: 0.625rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* Pricing */
+  .price-hero {
+    @apply text-5xl md:text-6xl font-extrabold tracking-tight leading-none;
+  }
+
+  .price-large {
+    @apply text-4xl md:text-5xl font-bold tracking-tight leading-tight;
+  }
+
+  .price-medium {
+    @apply text-2xl font-bold tracking-normal leading-tight;
+  }
+
+  /* Button Text */
+  .btn-text-large {
+    @apply text-base font-semibold tracking-widest uppercase;
+  }
+
+  .btn-text-base {
+    @apply text-sm font-semibold tracking-widest uppercase;
+  }
+
+  .btn-text-small {
+    @apply text-xs font-semibold tracking-widest uppercase;
+  }
+
+  /* Eyebrow Text (Above Titles) */
+  .eyebrow-light {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow-dark {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+
+  /* Contact Values (Special case for Contact page) */
+  .contact-value {
+    @apply text-xl font-bold italic;
+  }
+
+  /* Text Colors - Light Mode */
+  [data-theme='light'] .text-primary {
+    @apply text-gray-900;
+  }
+
+  [data-theme='light'] .text-secondary {
+    @apply text-gray-600;
+  }
+
+  [data-theme='light'] .text-tertiary {
+    @apply text-gray-500;
+  }
+
+  [data-theme='light'] .text-muted {
+    @apply text-gray-400;
+  }
+
+  [data-theme='light'] .text-subtle {
+    @apply text-gray-300;
+  }
+
+  /* Text Colors - Dark Mode */
+  [data-theme='dark'] .text-primary {
+    @apply text-white;
+  }
+
+  [data-theme='dark'] .text-secondary {
+    @apply text-gray-200;
+  }
+
+  [data-theme='dark'] .text-tertiary {
+    @apply text-gray-300;
+  }
+
+  [data-theme='dark'] .text-muted {
+    @apply text-gray-400;
+  }
+
+  [data-theme='dark'] .text-subtle {
+    @apply text-gray-500;
+  }
+
+  /* Responsive Text Utilities */
+  .text-responsive-xs {
+    @apply text-xs md:text-sm;
+  }
+
+  .text-responsive-sm {
+    @apply text-sm md:text-base;
+  }
+
+  .text-responsive-base {
+    @apply text-base md:text-lg;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg md:text-xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-xl md:text-2xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  .text-responsive-3xl {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  .text-responsive-hero {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  .text-responsive-display {
+    @apply text-5xl md:text-6xl lg:text-7xl xl:text-8xl;
+  }
+}
+
+@layer utilities {
+  /* Safe areas para iOS (notch, dynamic island, home indicator) */
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-left {
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+
+  .safe-right {
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .safe-x {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .safe-y {
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  /* Colores del theme */
+  .bg-theme-primary {
+    background-color: var(--accent);
+  }
+
+  .text-theme-primary {
+    color: var(--accent);
+  }
+
+  .border-theme {
+    border-color: var(--border);
+  }
+
+  /* Transición suave universal */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .blur-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(var(--blur, 10px));
+    backdrop-filter: blur(var(--blur, 10px));
+    
+    /* Un ligero color base ayuda a que el backdrop-filter se note más */
+    background-color: rgba(0, 0, 0, 0.1);
+    
+    /* Máscara radial elíptica usando la variable de transición */
+    --mask-start: calc(100% - var(--transition-length, 50%));
+    mask-image: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      transparent var(--mask-start),
+      black 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      transparent var(--mask-start),
+      black 100%
+    );
+  }
+
+  /* Ocultar scrollbar manteniendo funcionalidad */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Focus visible mejorado para accesibilidad */
+  .focus-visible-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+
+  [data-theme='light'] .focus-visible-ring {
+    @apply focus-visible:ring-blue-600;
+  }
+
+  [data-theme='dark'] .focus-visible-ring {
+    @apply focus-visible:ring-orange-500;
+  }
+}
+
+/* Safe areas iOS globales */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
   }
 }
 

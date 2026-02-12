@@ -61,7 +61,7 @@ const Experiences = () => {
 
   if (loading) return (
     <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
-      <div className="font-black italic animate-pulse uppercase tracking-[0.3em]">{t('syncCatalog')}</div>
+      <div className="eyebrow-dark animate-pulse">{t('syncCatalog')}</div>
     </div>
   );
 
@@ -71,10 +71,10 @@ const Experiences = () => {
     <div className={`min-h-screen pt-32 md:pt-40 pb-24 transition-colors duration-500 ${isDark ? 'bg-black text-white' : 'bg-slate-50 text-slate-900'}`}>
       <div className="section-container">
         <header className="mb-12 md:mb-20">
-          <h1 className={`text-4xl md:text-8xl mb-4 md:mb-6 ${isDark ? 'font-black italic uppercase tracking-tighter' : 'font-serif text-[#003366]'}`}>
+          <h1 className={`mb-4 md:mb-6 ${isDark ? 'heading-h1-dark' : 'heading-h1-light text-[#003366]'}`}>
             {t(siteContent.catalog_title || 'catalogTitleDark')}
           </h1>
-          <p className="text-sm md:text-xl font-bold opacity-60 uppercase italic tracking-widest">
+          <p className="body-large text-muted uppercase italic">
             {t(siteContent.catalog_sub || 'catalogSub')}
           </p>
         </header>
@@ -133,25 +133,25 @@ const Experiences = () => {
                         alt={exp.title} 
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" 
                       />
-                      <div className={`absolute top-0 right-0 p-3 md:p-4 font-black italic text-base md:text-xl ${isDark ? 'bg-[#ff6b00] text-black' : 'bg-[#003366] text-white'}`}>
+                      <div className={`absolute top-0 right-0 p-3 md:p-4 price-medium ${isDark ? 'bg-[#ff6b00] text-black' : 'bg-[#003366] text-white'}`}>
                         ${exp.price} USD
                       </div>
                     </div>
 
                     <div className="p-6 md:p-10 flex-grow flex flex-col">
-                      <div className="flex gap-4 md:gap-6 mb-4 md:mb-6 opacity-40 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]">
+                      <div className="flex gap-4 md:gap-6 mb-4 md:mb-6 label-tiny text-muted">
                         <span className="flex items-center gap-1.5"><MapPin size={10} /> {t(exp.location)}</span>
                         <span className="flex items-center gap-1.5"><Clock size={10} /> {t(exp.duration)}</span>
                       </div>
                       
-                      <h3 className={`text-xl md:text-3xl mb-6 leading-tight flex-grow break-words ${isDark ? 'font-black italic uppercase tracking-tighter' : 'font-serif text-[#003366]'}`}>
+                      <h3 className={`mb-6 flex-grow break-words ${isDark ? 'heading-h3-dark' : 'heading-h3-light text-[#003366]'}`}>
                         {t(exp.title)}
                       </h3>
 
                       <div className="pt-6 border-t border-current border-opacity-10 flex justify-between items-center">
                         <Link 
                           to={`/experience/${exp.id}`}
-                          className={`text-[10px] md:text-xs font-black uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all ${
+                          className={`label-base flex items-center gap-2 group-hover:gap-4 transition-all ${
                             isDark ? 'text-white' : 'text-[#003366]'
                           }`}
                         >

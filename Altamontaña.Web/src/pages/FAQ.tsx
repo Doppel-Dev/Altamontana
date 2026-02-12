@@ -20,10 +20,10 @@ const FAQItem = ({ faq, isOpen, toggle, isDark }: { faq: any, isOpen: boolean, t
         className="w-full text-left p-8 flex justify-between items-center gap-6"
       >
         <div className="flex items-center gap-6">
-          <h3 className={`text-xl md:text-2xl transition-all ${
-            isOpen 
-              ? (isDark ? 'text-[#ff6b00] font-black italic uppercase' : 'text-[#003366] font-serif') 
-              : (isDark ? 'text-white font-bold' : 'text-slate-800 font-serif')
+          <h3 className={`transition-all ${
+            isOpen
+              ? (isDark ? 'heading-h4-dark text-brand-orange' : 'heading-h4-light text-brand-blue')
+              : (isDark ? 'heading-h4-dark text-white' : 'heading-h4-light text-slate-800')
           }`}>
             {faq.q}
           </h3>
@@ -42,8 +42,8 @@ const FAQItem = ({ faq, isOpen, toggle, isDark }: { faq: any, isOpen: boolean, t
             transition={{ duration: 0.4, ease: "circOut" }}
             className="overflow-hidden"
           >
-            <div className={`px-24 pb-10 text-lg leading-relaxed ${isDark ? 'text-white/60 font-medium italic' : 'text-slate-600 font-serif'}`}>
-              <div className="max-w-2xl">
+            <div className={`px-4 sm:px-8 md:px-12 lg:px-24 pb-10 ${isDark ? 'italic' : ''}`}>
+              <div className="max-w-2xl body-large text-secondary">
                 {faq.a}
               </div>
             </div>
@@ -90,10 +90,10 @@ const FAQ = () => {
           >
             <ShieldCheck size={40} />
           </motion.div>
-          <h1 className={`text-5xl md:text-8xl mb-6 ${isDark ? 'font-black italic uppercase tracking-tighter text-white' : 'font-serif text-[#003366]'}`}>
+          <h1 className={isDark ? 'heading-h1-dark text-white mb-6' : 'heading-h1-light text-[#003366] mb-6'}>
             {t(content.faq_title || 'faqTitle')}
           </h1>
-          <p className="text-xl font-bold opacity-50 uppercase tracking-[0.2em] italic max-w-2xl" style={{ color: isDark ? 'white' : '#003366' }}>
+          <p className={`body-large text-muted uppercase italic max-w-2xl ${isDark ? '' : 'text-[#003366]'}`}>
             {t(content.faq_sub || 'faqSub')}
           </p>
         </header>
@@ -113,23 +113,23 @@ const FAQ = () => {
         <div className="mt-32 grid md:grid-cols-3 gap-8">
           <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
             <HelpCircle className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
-            <h4 className="font-black italic uppercase text-lg tracking-tighter">{t('support247')}</h4>
-            <p className="text-sm opacity-60 font-medium">{t('supportDesc')}</p>
+            <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('support247')}</h4>
+            <p className="body-small text-muted">{t('supportDesc')}</p>
           </div>
           <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
             <LifeBuoy className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
-            <h4 className="font-black italic uppercase text-lg tracking-tighter">{t('airInsurance')}</h4>
-            <p className="text-sm opacity-60 font-medium">{t('airInsuranceDesc')}</p>
+            <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('airInsurance')}</h4>
+            <p className="body-small text-muted">{t('airInsuranceDesc')}</p>
           </div>
           <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
             <ShieldAlert className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
-            <h4 className="font-black italic uppercase text-lg tracking-tighter">{t('dgacChile')}</h4>
-            <p className="text-sm opacity-60 font-medium">{t('dgacDesc')}</p>
+            <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('dgacChile')}</h4>
+            <p className="body-small text-muted">{t('dgacDesc')}</p>
           </div>
         </div>
 
         <div className="mt-32 text-center">
-          <h2 className={`text-3xl font-black italic uppercase tracking-tighter mb-8 ${isDark ? 'text-white' : 'text-[#003366]'}`}>
+          <h2 className={`mb-8 ${isDark ? 'heading-h2-dark text-white' : 'heading-h2-light text-[#003366]'}`}>
             {t('moreQuestions')}
           </h2>
           <Link 

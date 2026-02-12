@@ -44,14 +44,14 @@ const ExperienceDetail = () => {
         <div className="absolute inset-0 flex items-end">
           <div className="section-container pb-16">
             <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}>
-              <Link to="/experiences" className={`inline-flex items-center gap-2 mb-8 text-xs font-bold uppercase tracking-widest transition-colors ${isDark ? 'text-[#ff6b00]' : 'text-[#003366]'}`}>
+              <Link to="/experiences" className={`inline-flex items-center gap-2 mb-8 label-base transition-colors ${isDark ? 'text-[#ff6b00]' : 'text-[#003366]'}`}>
                 <ArrowLeft size={16} /> {t('backToCatalog')}
               </Link>
-              <h1 className={`text-3xl sm:text-5xl md:text-8xl mb-6 leading-[0.9] ${isDark ? 'font-black italic uppercase tracking-tighter' : 'font-serif text-[#003366]'}`}>
+              <h1 className={`mb-6 ${isDark ? 'heading-display-dark' : 'heading-display-light text-[#003366]'}`}>
                 {t(experience.title)}
               </h1>
               <div className="flex gap-4">
-                <span className={`px-6 py-2 text-xs font-bold uppercase italic shadow-xl ${isDark ? 'bg-[#ff6b00] text-black' : 'bg-[#003366] text-white'}`}>
+                <span className={`px-6 py-2 label-base italic shadow-xl ${isDark ? 'bg-[#ff6b00] text-black' : 'bg-[#003366] text-white'}`}>
                   {t(experience.location)}
                 </span>
               </div>
@@ -68,39 +68,39 @@ const ExperienceDetail = () => {
               {/* Features Bar */}
               <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 py-10 border-y ${isDark ? 'border-white/10' : 'border-slate-100'}`}>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">{t('duration')}</p>
-                  <p className="font-bold flex items-center gap-2 italic text-lg"><Clock size={18} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} /> {experience.duration}</p>
+                  <p className="label-tiny text-muted mb-2">{t('duration')}</p>
+                  <p className="body-large font-bold flex items-center gap-2 italic"><Clock size={18} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} /> {experience.duration}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">{t('groupSize')}</p>
-                  <p className="font-bold flex items-center gap-2 italic text-lg"><Users size={18} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} /> Máx 6</p>
+                  <p className="label-tiny text-muted mb-2">{t('groupSize')}</p>
+                  <p className="body-large font-bold flex items-center gap-2 italic"><Users size={18} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} /> Máx 6</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">{t('safety')}</p>
-                  <p className="font-bold flex items-center gap-2 italic text-lg"><Shield size={18} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} /> {t('certified')}</p>
+                  <p className="label-tiny text-muted mb-2">{t('safety')}</p>
+                  <p className="body-large font-bold flex items-center gap-2 italic"><Shield size={18} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} /> {t('certified')}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">{t('difficulty')}</p>
-                  <p className="font-bold italic text-lg">{t('moderate')}</p>
+                  <p className="label-tiny text-muted mb-2">{t('difficulty')}</p>
+                  <p className="body-large font-bold italic">{t('moderate')}</p>
                 </div>
               </div>
 
               <div className="prose prose-lg max-w-none">
-                <h2 className={`text-4xl mb-8 ${isDark ? 'font-black italic uppercase' : 'font-serif text-[#003366]'}`}>
+                <h2 className={`mb-8 ${isDark ? 'heading-h2-dark' : 'heading-h2-light text-[#003366]'}`}>
                   {isDark ? t('missionDesc') : t('aboutExp')}
                 </h2>
-                <p className={`leading-relaxed text-xl font-medium ${isDark ? 'text-white/60 uppercase' : 'text-slate-600'}`}>
+                <p className={`body-large ${isDark ? 'text-secondary uppercase' : 'text-secondary'}`}>
                   {t(experience.description)}
                 </p>
-                <p className={`mt-6 leading-relaxed ${isDark ? 'text-white/40 italic' : 'text-slate-500'}`}>
-                  {isDark 
+                <p className={`mt-6 body-base ${isDark ? 'text-muted italic' : 'text-muted'}`}>
+                  {isDark
                     ? t('tacticalPrep')
                     : t('conciergeTeam')}
                 </p>
               </div>
 
               <div className={`p-12 card-theme ${isDark ? 'bg-neutral-950 border-neutral-800' : 'bg-slate-50 border-slate-100'}`}>
-                <h3 className={`text-2xl mb-10 ${isDark ? 'font-black italic text-[#ff6b00]' : 'font-serif text-[#003366]'}`}>
+                <h3 className={`mb-10 ${isDark ? 'heading-h3-dark text-[#ff6b00]' : 'heading-h3-light text-[#003366]'}`}>
                   {isDark ? t('missionIncluded') : t('included')}
                 </h3>
                 <ul className="grid md:grid-cols-2 gap-8">
@@ -110,7 +110,7 @@ const ExperienceDetail = () => {
                     t('vipAccess'),
                     t('onboardCatering')
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-4 font-bold text-sm uppercase italic">
+                    <li key={i} className="flex items-center gap-4 label-large italic">
                       <div className={`p-1 ${isDark ? 'bg-[#ff6b00] text-black' : 'bg-[#003366] text-white'}`}>
                         <Check size={14} strokeWidth={4} />
                       </div>
@@ -128,18 +128,18 @@ const ExperienceDetail = () => {
                 className={`sticky top-32 p-10 card-theme ${isDark ? 'bg-white text-black' : 'bg-[#003366] text-white shadow-2xl shadow-[#003366]/20'}`}
               >
                 <div className={`mb-10 border-b pb-8 ${isDark ? 'border-black/10' : 'border-white/10'}`}>
-                  <span className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-3 block ${isDark ? 'text-black/50' : 'text-white/70'}`}>{t('finalPrice')}</span>
-                  <div className={`text-7xl font-black italic tracking-tighter leading-none ${isDark ? 'text-black' : 'text-white'}`}>
+                  <span className={`eyebrow-light mb-3 block ${isDark ? 'text-black/50' : 'text-white/70'}`}>{t('finalPrice')}</span>
+                  <div className={`price-hero ${isDark ? 'text-black' : 'text-white'}`}>
                     ${experience.price} <span className={`text-xl uppercase not-italic font-bold ${isDark ? 'text-black/40' : 'text-white/60'}`}>USD</span>
                   </div>
                 </div>
 
                 <div className="space-y-6 mb-12">
-                  <div className="flex items-center gap-4 font-bold uppercase italic text-sm">
+                  <div className="flex items-center gap-4 label-large italic">
                     <Calendar size={20} className={isDark ? 'text-black' : 'text-white'} />
                     {t('dailyDepartures')}
                   </div>
-                  <div className="flex items-center gap-4 font-bold uppercase italic text-sm">
+                  <div className="flex items-center gap-4 label-large italic">
                     <Zap size={20} className={isDark ? 'text-[#ff6b00]' : 'text-white'} fill="currentColor" />
                     {t('immediateAction')}
                   </div>
