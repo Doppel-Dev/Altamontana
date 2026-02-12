@@ -73,7 +73,7 @@ public class AppDbContext : DbContext
             new SiteContent { Id = 34, Key = "footer_srv4", Value = "{\"es\":\"Private Charter\",\"en\":\"Private Charter\",\"pt\":\"Charter Privado\"}" },
 
             // Catalog
-            new SiteContent { Id = 23, Key = "catalog_title", Value = "{\"es\":\"Misiones Activas\",\"en\":\"Active Missions\",\"pt\":\"Missões Ativas\"}" },
+            new SiteContent { Id = 23, Key = "catalog_title", Value = "{\"es\":\"Nuestras Experiencias\",\"en\":\"Our Experiences\",\"pt\":\"Nossas Experiências\"}" },
             new SiteContent { Id = 24, Key = "catalog_sub", Value = "{\"es\":\"Catálogo de Expediciones\",\"en\":\"Expedition Catalog\",\"pt\":\"Catálogo de Expedições\"}" }
         );
 

@@ -4,8 +4,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { useState, useEffect } from 'react';
 import { getExperiences, getSiteContent } from '../services/api';
 import { Experience } from '../types';
-import { Link } from 'react-router-dom';
-import { MapPin, Clock, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExperienceCard } from '../components/ExperienceCard';
 
 const Experiences = () => {
   const { theme } = useTheme();
@@ -114,53 +114,12 @@ const Experiences = () => {
               className={`flex ${showCarousel ? '' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'}`}
             >
               {experiences.map((exp) => (
-                <div 
+                <ExperienceCard 
                   key={exp.id} 
-                  className={`flex-shrink-0 ${
-                    showCarousel 
-                      ? (itemsToShow === 1 ? 'w-full' : itemsToShow === 2 ? 'w-1/2' : 'w-1/3') 
-                      : 'w-full'
-                  } p-2 md:p-4`}
-                >
-                  <motion.div 
-                    className={`group h-full flex flex-col transition-all duration-500 overflow-hidden ${
-                      isDark ? 'bg-neutral-900 border border-neutral-800' : 'bg-white shadow-xl'
-                    }`}
-                  >
-                    <div className="relative aspect-[4/5] overflow-hidden">
-                      <img 
-                        src={exp.imageUrl} 
-                        alt={exp.title} 
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110" 
-                      />
-                      <div className={`absolute top-0 right-0 p-3 md:p-4 price-medium ${isDark ? 'bg-[#ff6b00] text-black' : 'bg-[#003366] text-white'}`}>
-                        ${exp.price} USD
-                      </div>
-                    </div>
-
-                    <div className="p-6 md:p-10 flex-grow flex flex-col">
-                      <div className="flex gap-4 md:gap-6 mb-4 md:mb-6 label-tiny text-muted">
-                        <span className="flex items-center gap-1.5"><MapPin size={10} /> {t(exp.location)}</span>
-                        <span className="flex items-center gap-1.5"><Clock size={10} /> {t(exp.duration)}</span>
-                      </div>
-                      
-                      <h3 className={`mb-6 flex-grow break-words ${isDark ? 'heading-h3-dark' : 'heading-h3-light text-[#003366]'}`}>
-                        {t(exp.title)}
-                      </h3>
-
-                      <div className="pt-6 border-t border-current border-opacity-10 flex justify-between items-center">
-                        <Link 
-                          to={`/experience/${exp.id}`}
-                          className={`label-base flex items-center gap-2 group-hover:gap-4 transition-all ${
-                            isDark ? 'text-white' : 'text-[#003366]'
-                          }`}
-                        >
-                          {t('viewDetails')} <ArrowRight size={14} className={isDark ? 'text-[#ff6b00]' : 'text-[#003366]'} />
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
+                  exp={exp} 
+                  isDark={isDark} 
+                  className={showCarousel ? (itemsToShow === 1 ? 'w-full' : itemsToShow === 2 ? 'w-1/2' : 'w-1/3') : 'w-full'}
+                />
               ))}
             </motion.div>
           </div>

@@ -8,6 +8,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useAuth } from '../../context/AuthContext';
 import { LanguageSelector } from './LanguageSelector';
 import { ThemeToggle } from './ThemeToggle';
+import { NavbarExperiencesDropdown } from './NavbarExperiencesDropdown';
 
 interface NavbarDesktopMenuProps {
   isDark: boolean;
@@ -21,7 +22,6 @@ export const NavbarDesktopMenu: React.FC<NavbarDesktopMenuProps> = ({ isDark, sh
 
   const navLinks = [
     { name: t('home'), path: '/' },
-    { name: t('experiences'), path: '/experiences' },
     { name: t('faq'), path: '/faq' },
     { name: t('contact'), path: '/contact' },
   ];
@@ -32,8 +32,31 @@ export const NavbarDesktopMenu: React.FC<NavbarDesktopMenuProps> = ({ isDark, sh
 
   return (
     <div className="hidden md:flex gap-2 items-center">
-      {/* Navigation Links */}
-      {navLinks.map((link) => {
+      {/* Home Link */}
+      <Link
+        to="/"
+        className={`px-4 py-2 label-base transition-all focus-visible-ring ${
+          shouldShowBg
+            ? isDark
+              ? 'text-white/70 hover:text-brand-orange'
+              : 'text-brand-blue/70 hover:text-brand-blue'
+            : 'text-white/80 hover:text-white'
+        } ${
+          location.pathname === '/' ? (isDark ? 'text-brand-orange' : 'text-brand-blue font-black') : ''
+        }`}
+      >
+        {t('home')}
+      </Link>
+
+      {/* Experiences Dropdown */}
+      <NavbarExperiencesDropdown 
+        isDark={isDark} 
+        shouldShowBg={shouldShowBg} 
+        isActive={location.pathname === '/experiences' || location.pathname.startsWith('/experience/')}
+      />
+
+      {/* Other Navigation Links */}
+      {navLinks.filter(link => link.path !== '/').map((link) => {
         const isActive = location.pathname === link.path;
 
         return (
