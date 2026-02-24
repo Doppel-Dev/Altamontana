@@ -2,11 +2,13 @@
 import axios from 'axios';
 import { Experience, Booking } from '../types';
 
-// Using environment variable for API URL, defaulting to Railway production
-const API_URL = import.meta.env.VITE_API_URL || 'https://altamontana-production.up.railway.app/api'; 
+const API_URL = 'https://altamontana-production.up.railway.app/api/'; 
 
 const api = axios.create({
     baseURL: API_URL,
+    headers: {
+        'Content-Type': 'application/json'
+    }
 });
 
 api.interceptors.request.use((config) => {
