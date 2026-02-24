@@ -131,7 +131,7 @@ const Home = () => {
                          text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
-              {t(isDark ? content.home_hero_main_dark : content.home_hero_main_light) || 'Santiago'} <br />
+              {t(isDark ? content.home_hero_main_dark : content.home_hero_main_light) || t('companyName')} <br />
               <span className="text-white/90 font-serif italic normal-case text-4xl sm:text-5xl md:text-6xl block mt-4">
                 {t(isDark ? content.home_hero_title_dark : content.home_hero_title_light) || t('santiagoFromAir')}
               </span>
