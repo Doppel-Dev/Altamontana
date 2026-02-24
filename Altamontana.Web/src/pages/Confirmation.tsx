@@ -1,9 +1,9 @@
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, Printer, Share2, ShieldCheck, Calendar, CreditCard, Hash } from 'lucide-react';
+import { Check, ArrowRight, Printer, Download, ShieldCheck, Calendar, CreditCard, Hash } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { WebpayResponse } from '../types';
 
 const Confirmation = () => {
@@ -12,6 +12,7 @@ const Confirmation = () => {
   const { theme } = useTheme();
   const { t } = useLanguage();
   const isDark = theme === 'dark';
+  const voucherRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Si entran directo sin estado, mandarlos a home
@@ -33,23 +34,10 @@ const Confirmation = () => {
     window.print();
   };
 
-  const handleShare = async () => {
-    const shareData = {
-      title: `Altamontana Flight - ${t(experience.title)}`,
-      text: `¡Mi vuelo está confirmado! Me voy a volar con Altamontana Flight Experience: ${t(experience.title)}.`,
-      url: window.location.href,
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        await navigator.clipboard.writeText(window.location.href);
-        alert(t('linkCopied') || 'Enlace copiado al portapapeles');
-      }
-    } catch (err) {
-      console.error('Error sharing:', err);
-    }
+  const handleDownload = () => {
+    // En web, la mejor forma de "descargar" un voucher sin librerías pesadas
+    // es invocar el diálogo de impresión configurado para PDF.
+    window.print();
   };
 
   // Formatear fecha de Transbank o actual
@@ -96,13 +84,14 @@ const Confirmation = () => {
             
                   {/* Voucher / Ticket */}
                   <motion.div 
+                    ref={voucherRef}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`relative overflow-hidden rounded-[2rem] shadow-2xl ${isDark ? 'bg-neutral-900 border border-neutral-800' : 'bg-white'}`}
+                    className={`relative overflow-hidden rounded-[2rem] shadow-2xl print-voucher-card ${isDark ? 'bg-neutral-900 border border-neutral-800 text-white' : 'bg-white text-slate-900'}`}
                   >
                     {/* Decoración lateral de ticket */}
-                    <div className={`absolute top-1/2 -left-4 w-8 h-8 rounded-full -translate-y-1/2 ${isDark ? 'bg-black' : 'bg-slate-50'}`}></div>
-                    <div className={`absolute top-1/2 -right-4 w-8 h-8 rounded-full -translate-y-1/2 ${isDark ? 'bg-black' : 'bg-slate-50'}`}></div>
+                    <div className={`absolute top-1/2 -left-4 w-8 h-8 rounded-full -translate-y-1/2 no-print ${isDark ? 'bg-black' : 'bg-slate-50'}`}></div>
+                    <div className={`absolute top-1/2 -right-4 w-8 h-8 rounded-full -translate-y-1/2 no-print ${isDark ? 'bg-black' : 'bg-slate-50'}`}></div>
             
                     <div className="p-8 md:p-12">
                       <div className="flex flex-col md:flex-row justify-between gap-12 mb-12 border-b border-dashed pb-12 border-neutral-700/20">
@@ -132,7 +121,7 @@ const Confirmation = () => {
                             {paymentData?.accounting_date && (
                               <div>
                                 <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-2 flex items-center gap-2">
-                                  <Calendar size={12} /> Contable
+                                  <Calendar size={12} /> {t('accountingDate')}
                                 </p>
                                 <p className={`text-sm font-bold uppercase ${isDark ? 'text-white' : 'text-slate-900'}`}>
                                   {formatAccountingDate(paymentData.accounting_date)}
@@ -160,7 +149,11 @@ const Confirmation = () => {
                         </div>
                         <div>
                           <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-3">{t('paxCount')}</p>
-                          <p className={`text-lg font-black uppercase italic tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>{booking.participants} {booking.participants === 1 ? (isDark ? 'RECLUTA' : 'PASAJERO') : (isDark ? 'RECLUTAS' : 'PASAJEROS')}</p>
+                          <p className={`text-lg font-black uppercase italic tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                            {booking.participants} {booking.participants === 1 
+                              ? (isDark ? t('recruit') : t('passenger')) 
+                              : (isDark ? t('recruits') : t('passengersLabel'))}
+                          </p>
                         </div>
                         <div>
                           <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 mb-3">{t('paymentMethod')}</p>
@@ -185,8 +178,8 @@ const Confirmation = () => {
                     <button onClick={handlePrint} className="btn-primary-theme px-10 py-5 flex items-center gap-3">
                       <Printer size={20} /> {t('printVoucher')}
                     </button>
-                    <button onClick={handleShare} className={`px-10 py-5 font-bold uppercase tracking-widest text-xs flex items-center gap-3 border-2 transition-all ${isDark ? 'border-neutral-800 text-white hover:bg-white hover:text-black' : 'border-slate-200 text-slate-600 hover:border-[#003366] hover:text-[#003366]'}`}>
-                      <Share2 size={20} /> {t('share')}
+                    <button onClick={handleDownload} className={`px-10 py-5 font-bold uppercase tracking-widest text-xs flex items-center gap-3 border-2 transition-all ${isDark ? 'border-neutral-800 text-white hover:bg-white hover:text-black' : 'border-slate-200 text-slate-600 hover:border-[#003366] hover:text-[#003366]'}`}>
+                      <Download size={20} /> {t('downloadVoucher')}
                     </button>
                     <Link to="/" className={`px-10 py-5 font-bold uppercase tracking-widest text-xs flex items-center gap-3 border-2 transition-all ${isDark ? 'border-[#ff6b00] text-[#ff6b00] hover:bg-[#ff6b00] hover:text-black' : 'border-[#003366] text-[#003366] hover:bg-[#003366] hover:text-white'}`}>
                       {t('backToHome')} <ArrowRight size={16} />
@@ -199,13 +192,40 @@ const Confirmation = () => {
 
       <style>{`
         @media print {
+            @page {
+              margin: 1cm;
+              size: portrait;
+            }
             .no-print { display: none !important; }
-            body { background: white !important; }
-            .section-container { max-width: 100% !important; padding-top: 2rem !important; }
+            body { background: white !important; color: black !important; }
+            .section-container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .pt-40 { padding-top: 0 !important; }
+            
+            /* Aislar el voucher */
+            .print-voucher-card {
+                position: relative !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                box-shadow: none !important;
+                border: 1px solid #eee !important;
+                border-radius: 1rem !important;
+                background: ${isDark ? '#171717' : 'white'} !important;
+                color: ${isDark ? 'white' : 'black'} !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Asegurar visibilidad de textos */
+            .print-voucher-card p, .print-voucher-card span {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
         }
       `}</style>
     </div>
   );
+
 };
 
 export default Confirmation;

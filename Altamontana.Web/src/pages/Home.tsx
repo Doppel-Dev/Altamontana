@@ -131,8 +131,10 @@ const Home = () => {
                          text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
-              Santiago <br />
-              <span className="text-white/90 font-serif italic normal-case text-4xl sm:text-5xl md:text-6xl block mt-4">{t('santiagoFromAir')}</span>
+              {t(isDark ? content.home_hero_main_dark : content.home_hero_main_light) || 'Santiago'} <br />
+              <span className="text-white/90 font-serif italic normal-case text-4xl sm:text-5xl md:text-6xl block mt-4">
+                {t(isDark ? content.home_hero_title_dark : content.home_hero_title_light) || t('santiagoFromAir')}
+              </span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -142,7 +144,7 @@ const Home = () => {
               transition={{ delay: 0.4 }}
               className="text-white text-lg sm:text-xl md:text-2xl font-serif italic mb-10 max-w-2xl mx-auto leading-relaxed opacity-80"
             >
-              {t('homeHeroSub')}
+              {t(isDark ? content.home_hero_desc_dark : content.home_hero_desc_light) || t('homeHeroSub')}
             </motion.h2>
 
             {/* CTA Buttons */}

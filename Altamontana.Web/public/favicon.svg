@@ -1,0 +1,16 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo Azul de la Marca -->
+  <rect width="32" height="32" rx="4" fill="#003366"/>
+  
+  <!-- Montaña Blanca (Trazo Grueso) -->
+  <path d="M7 24L13.5 12L18.5 20L22.5 14L27 24" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Círculo Blanco para el Helicóptero -->
+  <circle cx="24" cy="8" r="7" fill="white"/>
+  
+  <!-- Icono de Helicóptero Simplificado (Azul) -->
+  <g transform="translate(19, 3) scale(0.4)">
+    <path d="M3 10h18M12 4v6M8 12h11a3 3 0 0 0 0-6H9a3 3 0 0 0-3 3v2" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M4 14h16" stroke="#003366" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
