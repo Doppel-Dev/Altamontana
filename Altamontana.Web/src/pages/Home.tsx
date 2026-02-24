@@ -15,6 +15,7 @@ const Home = () => {
   const isDark = theme === 'dark';
   const [content, setContent] = useState<any>({});
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [loading, setLoading] = useState(true);
   const containerRef = useRef<HTMLElement>(null);
 
   // Mouse Parallax Logic
@@ -46,7 +47,8 @@ const Home = () => {
       }, {});
       setContent(contentMap);
       setExperiences(expRes.data.slice(0, 3)); // Solo las primeras 3 para el Home
-    });
+      setLoading(false);
+    }).catch(() => setLoading(false));
   }, []);
 
   const heroImg = isDark
@@ -99,77 +101,81 @@ const Home = () => {
 
         {/* Hero Content */}
         <div className="section-container relative z-30 text-center px-4">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ 
-              y: 0, 
-              opacity: 1
-            }}
-            style={{
-              x: contentX,
-              y: contentY
-            }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-4xl mx-auto"
-          >
-            {/* Eyebrow Text */}
-            <motion.p
-              initial={{ opacity: 0, letterSpacing: '0.1em' }}
-              animate={{ opacity: 1, letterSpacing: '0.4em' }}
-              transition={{ delay: 0.2, duration: 1 }}
-              className="text-white text-[10px] sm:text-xs font-bold uppercase mb-6 tracking-[0.4em]"
-            >
-              {t(isDark ? content.home_hero_eyebrow_dark : content.home_hero_eyebrow_light) || (isDark ? t('aviationDivision') : t('mountainExperiences'))}
-            </motion.p>
-
-            {/* Main Title */}
-            <motion.h1
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-white font-black uppercase leading-[0.9] tracking-tighter mb-8
-                         text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
-              style={{ fontFamily: 'Inter, sans-serif' }}
-            >
-              {t(isDark ? content.home_hero_main_dark : content.home_hero_main_light) || (isDark ? 'ALTA MONTAÑA' : 'ALTA MONTAÑA')} <br />
-              <span className="text-white/90 font-serif italic normal-case text-4xl sm:text-5xl md:text-6xl block mt-4">
-                {t(isDark ? content.home_hero_title_dark : content.home_hero_title_light) || t('santiagoFromAir')}
-              </span>
-            </motion.h1>
-
-            {/* Subtitle */}
-            <motion.h2
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-white text-lg sm:text-xl md:text-2xl font-serif italic mb-10 max-w-2xl mx-auto leading-relaxed opacity-80"
-            >
-              {t(isDark ? content.home_hero_desc_dark : content.home_hero_desc_light) || t('homeHeroSub')}
-            </motion.h2>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-            >
-              <Link
-                to="/experiences"
-                className="group px-10 py-4 bg-white text-black font-bold text-xs uppercase tracking-[0.2em] transition-all duration-500 flex items-center gap-3 min-w-[200px] justify-center hover:bg-black hover:text-white border border-white"
+          <AnimatePresence>
+            {!loading && (
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ 
+                  y: 0, 
+                  opacity: 1
+                }}
+                style={{
+                  x: contentX,
+                  y: contentY
+                }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="max-w-4xl mx-auto"
               >
-                {t(content.home_hero_btn || 'exploreTours')}
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
+                {/* Eyebrow Text */}
+                <motion.p
+                  initial={{ opacity: 0, letterSpacing: '0.1em' }}
+                  animate={{ opacity: 1, letterSpacing: '0.4em' }}
+                  transition={{ delay: 0.2, duration: 1 }}
+                  className="text-white text-[10px] sm:text-xs font-bold uppercase mb-6 tracking-[0.4em]"
+                >
+                  {t(isDark ? content.home_hero_eyebrow_dark : content.home_hero_eyebrow_light) || (isDark ? t('aviationDivision') : t('mountainExperiences'))}
+                </motion.p>
 
-              <Link
-                to="/contact"
-                className="px-10 py-4 bg-transparent hover:bg-white text-white hover:text-black font-bold text-xs uppercase tracking-[0.2em] border border-white rounded-none transition-all duration-500 min-w-[200px] text-center"
-              >
-                {t('directContact')}
-              </Link>
-            </motion.div>
-          </motion.div>
+                {/* Main Title */}
+                <motion.h1
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-white font-black uppercase leading-[0.9] tracking-tighter mb-8
+                             text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
+                  style={{ fontFamily: 'Inter, sans-serif' }}
+                >
+                  {t(isDark ? content.home_hero_main_dark : content.home_hero_main_light) || (isDark ? 'ALTA MONTAÑA' : 'ALTA MONTAÑA')} <br />
+                  <span className="text-white/90 font-serif italic normal-case text-4xl sm:text-5xl md:text-6xl block mt-4">
+                    {t(isDark ? content.home_hero_title_dark : content.home_hero_title_light) || t('santiagoFromAir')}
+                  </span>
+                </motion.h1>
+
+                {/* Subtitle */}
+                <motion.h2
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-white text-lg sm:text-xl md:text-2xl font-serif italic mb-10 max-w-2xl mx-auto leading-relaxed opacity-80"
+                >
+                  {t(isDark ? content.home_hero_desc_dark : content.home_hero_desc_light) || t('homeHeroSub')}
+                </motion.h2>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+                >
+                  <Link
+                    to="/experiences"
+                    className="group px-10 py-4 bg-white text-black font-bold text-xs uppercase tracking-[0.2em] transition-all duration-500 flex items-center gap-3 min-w-[200px] justify-center hover:bg-black hover:text-white border border-white"
+                  >
+                    {t(content.home_hero_btn || 'exploreTours')}
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+
+                  <Link
+                    to="/contact"
+                    className="px-10 py-4 bg-transparent hover:bg-white text-white hover:text-black font-bold text-xs uppercase tracking-[0.2em] border border-white rounded-none transition-all duration-500 min-w-[200px] text-center"
+                  >
+                    {t('directContact')}
+                  </Link>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Scroll Indicator */}
