@@ -60,6 +60,7 @@ const FAQ = () => {
   const isDark = theme === 'dark';
   const [content, setContent] = useState<any>({});
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getSiteContent().then(res => {
@@ -68,7 +69,8 @@ const FAQ = () => {
         return acc;
       }, {});
       setContent(contentMap);
-    });
+      setLoading(false);
+    }).catch(() => setLoading(false));
   }, []);
 
   // Mapeamos dinámicamente desde el contenido de la base de datos
@@ -82,65 +84,75 @@ const FAQ = () => {
   return (
     <div className={`min-h-screen pt-40 pb-24 transition-colors duration-500 ${isDark ? 'bg-black' : 'bg-slate-50'}`}>
       <div className="section-container max-w-5xl relative z-10">
-        <header className="mb-24 flex flex-col items-center text-center">
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className={`p-4 rounded-full mb-8 ${isDark ? 'bg-[#ff6b00]/10 text-[#ff6b00]' : 'bg-[#003366]/10 text-[#003366]'}`}
-          >
-            <ShieldCheck size={40} />
-          </motion.div>
-          <h1 className={isDark ? 'heading-h1-dark text-white mb-6' : 'heading-h1-light text-[#003366] mb-6'}>
-            {t(content.faq_title || 'faqTitle')}
-          </h1>
-          <p className={`body-large text-muted uppercase italic max-w-2xl ${isDark ? '' : 'text-[#003366]'}`}>
-            {t(content.faq_sub || 'faqSub')}
-          </p>
-        </header>
+        <AnimatePresence mode="wait">
+          {!loading && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <header className="mb-24 flex flex-col items-center text-center">
+                <motion.div 
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className={`p-4 rounded-full mb-8 ${isDark ? 'bg-[#ff6b00]/10 text-[#ff6b00]' : 'bg-[#003366]/10 text-[#003366]'}`}
+                >
+                  <ShieldCheck size={40} />
+                </motion.div>
+                <h1 className={isDark ? 'heading-h1-dark text-white mb-6' : 'heading-h1-light text-[#003366] mb-6'}>
+                  {t(content.faq_title || 'faqTitle')}
+                </h1>
+                <p className={`body-large text-muted uppercase italic max-w-2xl ${isDark ? '' : 'text-[#003366]'}`}>
+                  {t(content.faq_sub || 'faqSub')}
+                </p>
+              </header>
 
-        <div className={`border-t border-b ${isDark ? 'border-white/10' : 'border-slate-200'}`}>
-          {faqs.map((faq, i) => (
-            <FAQItem 
-              key={i} 
-              faq={faq} 
-              isOpen={openIndex === i} 
-              toggle={() => setOpenIndex(openIndex === i ? null : i)}
-              isDark={isDark}
-            />
-          ))}
-        </div>
+              <div className={`border-t border-b ${isDark ? 'border-white/10' : 'border-slate-200'}`}>
+                {faqs.map((faq, i) => (
+                  <FAQItem 
+                    key={i} 
+                    faq={faq} 
+                    isOpen={openIndex === i} 
+                    toggle={() => setOpenIndex(openIndex === i ? null : i)}
+                    isDark={isDark}
+                  />
+                ))}
+              </div>
 
-        <div className="mt-32 grid md:grid-cols-3 gap-8">
-          <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
-            <HelpCircle className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
-            <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('support247')}</h4>
-            <p className="body-small text-muted">{t('supportDesc')}</p>
-          </div>
-          <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
-            <LifeBuoy className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
-            <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('airInsurance')}</h4>
-            <p className="body-small text-muted">{t('airInsuranceDesc')}</p>
-          </div>
-          <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
-            <ShieldAlert className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
-            <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('dgacChile')}</h4>
-            <p className="body-small text-muted">{t('dgacDesc')}</p>
-          </div>
-        </div>
+              <div className="mt-32 grid md:grid-cols-3 gap-8">
+                <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
+                  <HelpCircle className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
+                  <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('support247')}</h4>
+                  <p className="body-small text-muted">{t('supportDesc')}</p>
+                </div>
+                <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
+                  <LifeBuoy className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
+                  <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('airInsurance')}</h4>
+                  <p className="body-small text-muted">{t('airInsuranceDesc')}</p>
+                </div>
+                <div className={`p-8 card-theme flex flex-col gap-4 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
+                  <ShieldAlert className={isDark ? "text-[#ff6b00]" : "text-[#003366]"} size={32} />
+                  <h4 className={isDark ? 'heading-h4-dark' : 'heading-h4-light'}>{t('dgacChile')}</h4>
+                  <p className="body-small text-muted">{t('dgacDesc')}</p>
+                </div>
+              </div>
 
-        <div className="mt-32 text-center">
-          <h2 className={`mb-8 ${isDark ? 'heading-h2-dark text-white' : 'heading-h2-light text-[#003366]'}`}>
-            {t('moreQuestions')}
-          </h2>
-          <Link 
-            to="/contact" 
-            className={`inline-flex items-center gap-4 px-12 py-6 font-black uppercase italic transition-all active:scale-95 ${
-              isDark ? 'bg-[#ff6b00] text-black hover:bg-white' : 'bg-[#003366] text-white hover:bg-slate-800'
-            }`}
-          >
-            {t('talkConcierge')} <ArrowRight size={20} />
-          </Link>
-        </div>
+              <div className="mt-32 text-center">
+                <h2 className={`mb-8 ${isDark ? 'heading-h2-dark text-white' : 'heading-h2-light text-[#003366]'}`}>
+                  {t('moreQuestions')}
+                </h2>
+                <Link 
+                  to="/contact" 
+                  className={`inline-flex items-center gap-4 px-12 py-6 font-black uppercase italic transition-all active:scale-95 ${
+                    isDark ? 'bg-[#ff6b00] text-black hover:bg-white' : 'bg-[#003366] text-white hover:bg-slate-800'
+                  }`}
+                >
+                  {t('talkConcierge')} <ArrowRight size={20} />
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion, useSpring } from 'framer-motion';
+import { motion, useSpring, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Star, Gauge, Users } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
