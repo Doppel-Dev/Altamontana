@@ -21,6 +21,7 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Admin = lazy(() => import('./pages/Admin'));
 const Login = lazy(() => import('./pages/Login'));
 const PaymentStatus = lazy(() => import('./pages/PaymentStatus'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
@@ -57,6 +58,9 @@ function App() {
               </Route>
 
               <Route path="/payment-status" element={<PaymentStatus />} />
+              
+              {/* Fallback 404 Route */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </main>

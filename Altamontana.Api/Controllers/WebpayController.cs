@@ -28,7 +28,7 @@ public class WebpayController : ControllerBase
             buy_order = "ORD" + new Random().Next(100000, 999999),
             session_id = "SES" + new Random().Next(100000, 999999),
             amount = (int)Math.Round(request.Amount),
-            return_url = "http://localhost:5146/api/webpay/return"
+            return_url = "https://altamontana-production.up.railway.app/api/webpay/return"
         };
 
         string jsonPayload = JsonSerializer.Serialize(payload);
@@ -82,14 +82,14 @@ public class WebpayController : ControllerBase
     public IActionResult ReturnForm([FromForm] string? token_ws, [FromForm] string? TBK_TOKEN)
     {
         var token = token_ws ?? TBK_TOKEN;
-        return Redirect($"http://localhost:5173/payment-status?token_ws={token}");
+        return Redirect($"https://altamontañachile.com/payment-status?token_ws={token}");
     }
 
     [HttpGet("return")]
     public IActionResult ReturnGet([FromQuery] string? token_ws, [FromQuery] string? TBK_TOKEN)
     {
         var token = token_ws ?? TBK_TOKEN;
-        return Redirect($"http://localhost:5173/payment-status?token_ws={token}");
+        return Redirect($"https://altamontañachile.com/payment-status?token_ws={token}");
     }
 
     [HttpGet("commit")]

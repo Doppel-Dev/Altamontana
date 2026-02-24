@@ -119,7 +119,7 @@ const Home = () => {
               transition={{ delay: 0.2, duration: 1 }}
               className="text-white text-[10px] sm:text-xs font-bold uppercase mb-6 tracking-[0.4em]"
             >
-              {isDark ? 'DIVISIÓN DE AVIACIÓN PRIVADA' : 'EXPERIENCIAS DE ALTA MONTAÑA'}
+              {isDark ? t('aviationDivision') : t('mountainExperiences')}
             </motion.p>
 
             {/* Main Title */}
@@ -132,7 +132,7 @@ const Home = () => {
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Santiago <br />
-              <span className="text-white/90 font-serif italic normal-case text-4xl sm:text-5xl md:text-6xl block mt-4">Desde el Aire</span>
+              <span className="text-white/90 font-serif italic normal-case text-4xl sm:text-5xl md:text-6xl block mt-4">{t('santiagoFromAir')}</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -142,7 +142,7 @@ const Home = () => {
               transition={{ delay: 0.4 }}
               className="text-white text-lg sm:text-xl md:text-2xl font-serif italic mb-10 max-w-2xl mx-auto leading-relaxed opacity-80"
             >
-              Experiencias en helicóptero, expediciones a los Andes y aviación de lujo en Chile.
+              {t('homeHeroSub')}
             </motion.h2>
 
             {/* CTA Buttons */}
@@ -154,17 +154,17 @@ const Home = () => {
             >
               <Link
                 to="/experiences"
-                className="group px-10 py-4 bg-white text-black font-bold text-xs uppercase tracking-[0.2em] transition-all duration-500 flex items-center gap-3 min-w-[220px] justify-center hover:bg-black hover:text-white border border-white"
+                className="group px-10 py-4 bg-white text-black font-bold text-xs uppercase tracking-[0.2em] transition-all duration-500 flex items-center gap-3 min-w-[200px] justify-center hover:bg-black hover:text-white border border-white"
               >
-                {t(content.home_hero_btn || 'Explorar Tours')}
+                {t(content.home_hero_btn || 'exploreTours')}
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <Link
                 to="/contact"
-                className="px-10 py-4 bg-transparent hover:bg-white text-white hover:text-black font-bold text-xs uppercase tracking-[0.2em] border border-white rounded-none transition-all duration-500 min-w-[220px] text-center"
+                className="px-10 py-4 bg-transparent hover:bg-white text-white hover:text-black font-bold text-xs uppercase tracking-[0.2em] border border-white rounded-none transition-all duration-500 min-w-[200px] text-center"
               >
-                Contacto Directo
+                {t('directContact')}
               </Link>
             </motion.div>
           </motion.div>
