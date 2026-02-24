@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Septos.Api.Models;
+using Altamontana.Api.Models;
 
-namespace Septos.Api.Data;
+namespace Altamontana.Api.Data;
 
 public class AppDbContext : DbContext
 {
@@ -24,7 +24,7 @@ public class AppDbContext : DbContext
                 Username = "admin", 
                 // Password: admin123
                 PasswordHash = "$2a$11$TWDy2qtT4iQfbrzV5nBe8egaklANcAA86fLp/dH2ccDEsQ9U5Rr5m",
-                RecoveryEmail = "admin@septos.cl"
+                RecoveryEmail = "admin@Altamontana.cl"
             }
         );
         
@@ -48,7 +48,7 @@ public class AppDbContext : DbContext
             new SiteContent { Id = 6, Key = "faq_title", Value = "Seguridad & FAQ" },
             new SiteContent { Id = 7, Key = "faq_sub", Value = "Respuestas para su tranquilidad." },
             
-            new SiteContent { Id = 10, Key = "faq_q1", Value = "¿Es seguro reservar con Septos?" },
+            new SiteContent { Id = 10, Key = "faq_q1", Value = "¿Es seguro reservar con Altamontana?" },
             new SiteContent { Id = 11, Key = "faq_a1", Value = "Sí, utilizamos protocolos de seguridad de estándar bancario y todos nuestros guías están certificados internacionalmente." },
             new SiteContent { Id = 12, Key = "faq_q2", Value = "¿Cómo recibo mi voucher?" },
             new SiteContent { Id = 13, Key = "faq_a2", Value = "El voucher digital se envía automáticamente a su correo tras confirmar el pago." },
@@ -60,7 +60,7 @@ public class AppDbContext : DbContext
             // Contact Page
             new SiteContent { Id = 8, Key = "contact_title", Value = "Contacte a Concierge" },
             new SiteContent { Id = 9, Key = "contact_sub", Value = "Estamos disponibles 24/7 para diseñar su itinerario perfecto en la Cordillera." },
-            new SiteContent { Id = 18, Key = "contact_email", Value = "concierge@septos.com" },
+            new SiteContent { Id = 18, Key = "contact_email", Value = "concierge@Altamontana.com" },
             new SiteContent { Id = 19, Key = "contact_phone", Value = "+54 11 1234 5678" },
             new SiteContent { Id = 20, Key = "contact_address", Value = "Sector Alpha, Vitacura" },
             
@@ -108,3 +108,4 @@ public class AppDbContext : DbContext
         );
     }
 }
+

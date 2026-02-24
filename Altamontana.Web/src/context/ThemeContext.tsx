@@ -11,13 +11,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem('septos-theme');
+    const saved = localStorage.getItem('Altamontana-theme');
     return (saved as Theme) || 'light';
   });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('septos-theme', theme);
+    localStorage.setItem('Altamontana-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
@@ -34,3 +34,4 @@ export const useTheme = () => {
   if (!context) throw new Error('useTheme must be used within ThemeProvider');
   return context;
 };
+

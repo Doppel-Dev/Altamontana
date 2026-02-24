@@ -30,7 +30,7 @@ const Contact = () => {
     {
       icon: <Mail size={24} />,
       label: t('digitalChannel') || 'Canal Digital',
-      value: t(content.contact_email || 'concierge@septos.com'),
+      value: t(content.contact_email || 'concierge@Altamontana.com'),
     },
     {
       icon: <Phone size={24} />,

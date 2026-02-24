@@ -1,4 +1,4 @@
-namespace Septos.Api.Models;
+namespace Altamontana.Api.Models;
 
 public class Booking
 {

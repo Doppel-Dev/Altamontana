@@ -172,7 +172,7 @@ const Admin = () => {
 
   const handleSyncContact = async () => {
     const contactKeys = [
-      { key: 'contact_email', val: 'concierge@septos.com' },
+      { key: 'contact_email', val: 'concierge@Altamontana.com' },
       { key: 'contact_phone', val: '+54 11 1234 5678' },
       { key: 'contact_address', val: JSON.stringify({ es: 'Sector Alpha', en: 'Alpha Sector', pt: 'Setor Alfa' }) }
     ];

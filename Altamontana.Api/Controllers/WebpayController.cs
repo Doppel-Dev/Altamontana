@@ -3,9 +3,9 @@ using System.Text;
 using System.Text.Json;
 using System.Net;
 using System.Net.Http.Headers;
-using Septos.Api.Models;
+using Altamontana.Api.Models;
 
-namespace Septos.Api.Controllers;
+namespace Altamontana.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -43,7 +43,7 @@ public class WebpayController : ControllerBase
         // ENCABEZADOS
         requestMessage.Headers.Clear();
         requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        requestMessage.Headers.Add("User-Agent", "SeptosApi/1.0");
+        requestMessage.Headers.Add("User-Agent", "AltamontanaApi/1.0");
         requestMessage.Headers.TryAddWithoutValidation("Tbk-Api-Key-Id", CommerceCode);
         requestMessage.Headers.TryAddWithoutValidation("Tbk-Api-Key-Secret", ApiKey);
         
@@ -103,7 +103,7 @@ public class WebpayController : ControllerBase
 
         requestMessage.Headers.Clear();
         requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        requestMessage.Headers.Add("User-Agent", "SeptosApi/1.0");
+        requestMessage.Headers.Add("User-Agent", "AltamontanaApi/1.0");
         requestMessage.Headers.TryAddWithoutValidation("Tbk-Api-Key-Id", CommerceCode);
         requestMessage.Headers.TryAddWithoutValidation("Tbk-Api-Key-Secret", ApiKey);
         
@@ -135,3 +135,4 @@ public class WebpayController : ControllerBase
         public decimal Amount { get; set; } 
     }
 }
+

@@ -131,13 +131,13 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
-    const saved = localStorage.getItem('septos-lang');
+    const saved = localStorage.getItem('Altamontana-lang');
     return (saved as Language) || 'es';
   });
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('septos-lang', lang);
+    localStorage.setItem('Altamontana-lang', lang);
   };
 
   const t = (val: string) => {

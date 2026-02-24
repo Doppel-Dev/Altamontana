@@ -35,8 +35,8 @@ const Confirmation = () => {
 
   const handleShare = async () => {
     const shareData = {
-      title: `Septos Flight - ${t(experience.title)}`,
-      text: `¡Mi vuelo está confirmado! Me voy a volar con Septos Flight Experience: ${t(experience.title)}.`,
+      title: `Altamontana Flight - ${t(experience.title)}`,
+      text: `¡Mi vuelo está confirmado! Me voy a volar con Altamontana Flight Experience: ${t(experience.title)}.`,
       url: window.location.href,
     };
 
@@ -193,7 +193,7 @@ const Confirmation = () => {
                     </Link>
                   </div>
         <div className="mt-20 text-center opacity-20 font-black italic uppercase text-[10px] tracking-[0.5em] no-print">
-            Septos Flight Experience &copy; 2024 - Sky is not the limit
+            Altamontana Flight Experience &copy; 2024 - Sky is not the limit
         </div>
       </div>
 

@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Septos.Api.Data;
-using Septos.Api.Models;
+using Altamontana.Api.Data;
+using Altamontana.Api.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Septos.Api.Controllers;
+namespace Altamontana.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

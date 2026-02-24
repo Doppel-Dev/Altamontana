@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Septos.Api.Data;
-using Septos.Api.Models;
+using Altamontana.Api.Data;
+using Altamontana.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Septos.Api.Controllers;
+namespace Altamontana.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
