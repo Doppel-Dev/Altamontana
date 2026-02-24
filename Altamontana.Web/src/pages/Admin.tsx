@@ -205,6 +205,14 @@ const Admin = () => {
 
   const handleSyncHomeFeatures = async () => {
     const featKeys = [
+      { key: 'home_hero_eyebrow_light', val: JSON.stringify({ es: 'EXPERIENCIAS DE ALTA MONTAÑA', en: 'HIGH MOUNTAIN EXPERIENCES', pt: 'EXPERIÊNCIAS DE ALTA MONTANHA' }) },
+      { key: 'home_hero_eyebrow_dark', val: JSON.stringify({ es: 'DIVISIÓN DE AVIACIÓN PRIVADA', en: 'PRIVATE AVIATION DIVISION', pt: 'DIVISÃO DE AVIAÇÃO PRIVADA' }) },
+      { key: 'home_hero_main_light', val: JSON.stringify({ es: 'ALTA MONTAÑA', en: 'HIGH MOUNTAIN', pt: 'ALTA MONTANHA' }) },
+      { key: 'home_hero_main_dark', val: JSON.stringify({ es: 'ALTA MONTAÑA', en: 'HIGH MOUNTAIN', pt: 'ALTA MONTANHA' }) },
+      { key: 'home_hero_title_light', val: JSON.stringify({ es: 'Santiago Desde el Aire', en: 'Santiago From the Air', pt: 'Santiago do Ar' }) },
+      { key: 'home_hero_title_dark', val: JSON.stringify({ es: 'Santiago Desde el Aire', en: 'Santiago From the Air', pt: 'Santiago do Ar' }) },
+      { key: 'home_hero_desc_light', val: JSON.stringify({ es: 'Experiencias en helicóptero, expediciones a los Andes y aviación de lujo en Chile.', en: 'Helicopter experiences, Andes expeditions, and luxury aviation in Chile.', pt: 'Experiências em helicóptero, expedições aos Andes e aviação de luxo no Chile.' }) },
+      { key: 'home_hero_desc_dark', val: JSON.stringify({ es: 'Experiencias en helicóptero, expediciones a los Andes y aviación de lujo en Chile.', en: 'Helicopter experiences, Andes expeditions, and luxury aviation in Chile.', pt: 'Experiências em helicóptero, expedições aos Andes e aviação de luxo no Chile.' }) },
       { key: 'home_hero_btn', val: JSON.stringify({ es: 'Ver Experiencias', en: 'View Experiences', pt: 'Ver Experiências' }) },
       { key: 'home_feat1_title', val: JSON.stringify({ es: 'Flota Moderna', en: 'Modern Fleet', pt: 'Frota Moderna' }) },
       { key: 'home_feat1_desc', val: JSON.stringify({ es: 'Aeronaves Airbus y Bell...', en: 'Airbus and Bell...', pt: 'Aeronaves Airbus...' }) },
@@ -379,7 +387,15 @@ const Admin = () => {
                     <div key={item.id} className={`p-8 card-theme space-y-6 ${isDark ? 'bg-neutral-900 border-neutral-800' : 'bg-white shadow-xl border-none'}`}>
                       <div className="flex justify-between items-center border-b border-current border-opacity-10 pb-4">
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-40">
-                          {item.key === 'home_hero_btn' ? 'Texto Botón Principal' :
+                          {item.key === 'home_hero_eyebrow_light' ? 'Hero: Eyebrow (Modo Claro)' :
+                           item.key === 'home_hero_eyebrow_dark' ? 'Hero: Eyebrow (Modo Oscuro)' :
+                           item.key === 'home_hero_main_light' ? 'Hero: Título Principal (Modo Claro)' :
+                           item.key === 'home_hero_main_dark' ? 'Hero: Título Principal (Modo Oscuro)' :
+                           item.key === 'home_hero_title_light' ? 'Hero: Subtítulo Cursiva (Modo Claro)' :
+                           item.key === 'home_hero_title_dark' ? 'Hero: Subtítulo Cursiva (Modo Oscuro)' :
+                           item.key === 'home_hero_desc_light' ? 'Hero: Descripción (Modo Claro)' :
+                           item.key === 'home_hero_desc_dark' ? 'Hero: Descripción (Modo Oscuro)' :
+                           item.key === 'home_hero_btn' ? 'Texto Botón Principal' :
                            item.key === 'home_feat1_title' ? 'Característica 1: Título' : 
                            item.key === 'home_feat1_desc' ? 'Característica 1: Descripción' :
                            item.key === 'home_feat2_title' ? 'Característica 2: Título' :
