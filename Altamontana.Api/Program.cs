@@ -65,6 +65,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAll");
 
+app.UseStaticFiles(); // Habilita servir archivos desde wwwroot
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

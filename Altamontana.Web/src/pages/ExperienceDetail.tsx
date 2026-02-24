@@ -7,6 +7,7 @@ import { Clock, Shield, Users, ArrowLeft, MapPin, Info, ChevronLeft, ChevronRigh
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import LoadingScreen from '../components/LoadingScreen';
+import { getImageUrl } from '../lib/utils';
 import {
   Carousel,
   Slider,
@@ -109,7 +110,7 @@ const ExperienceDetail = () => {
                       {experienceImages.map((src, index) => (
                         <Slider key={index} className="w-full h-full">
                           <img 
-                            src={src} 
+                            src={getImageUrl(src)} 
                             className="w-full h-full object-cover transition-transform duration-1000" 
                             alt={`${experience.title} ${index + 1}`} 
                           />

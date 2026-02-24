@@ -74,15 +74,24 @@ public class ExperiencesController : ControllerBase
             return BadRequest("No se seleccionó ningún archivo.");
 
         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-        // Guardamos en la carpeta public del frontend para que esté disponible inmediatamente
-        var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "Altamontaña.Web", "public", "img", fileName);
+        
+        // Creamos la ruta física absoluta a wwwroot/uploads
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+        if (!Directory.Exists(uploadsFolder))
+        {
+            Directory.CreateDirectory(uploadsFolder);
+        }
+
+        var path = Path.Combine(uploadsFolder, fileName);
 
         using (var stream = new FileStream(path, FileMode.Create))
         {
             await file.CopyToAsync(stream);
         }
 
-        return Ok(new { url = $"/img/{fileName}" });
+        // Devolvemos la URL relativa que se servirá por app.UseStaticFiles()
+        // El frontend la recibirá como /uploads/xxxx.jpg
+        return Ok(new { url = $"/uploads/{fileName}" });
     }
 
     [Authorize]

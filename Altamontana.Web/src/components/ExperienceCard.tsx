@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Clock, ArrowRight, Crosshair, Shield } from 'lucide-react';
 import { Experience } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import { getImageUrl } from '../lib/utils';
 
 interface ExperienceCardProps {
   exp: Experience;
@@ -36,7 +37,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({ exp, isDark, cla
           }`} />
           
           <img 
-            src={exp.imageUrl} 
+            src={getImageUrl(exp.imageUrl)} 
             alt={exp.title} 
             className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
               isDark ? 'grayscale group-hover:grayscale-0' : ''
