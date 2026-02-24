@@ -57,11 +57,9 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Habilitamos Swagger también en producción para que el usuario pueda probarlo
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors("AllowAll");
 
@@ -80,6 +78,9 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+// Mensaje de bienvenida en la raíz para evitar el 404
+app.MapGet("/", () => "Altamontana API is running. Visit /swagger for documentation.");
 
 // Ensure database is created
 using (var scope = app.Services.CreateScope())
