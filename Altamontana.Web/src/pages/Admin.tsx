@@ -320,7 +320,7 @@ const Admin = () => {
                   <h2 className="text-2xl font-black uppercase italic opacity-60">Catálogo ({editLang})</h2>
                   <div className="flex gap-4">
                     <ActionButton onClick={handleSyncCatalog} variant="secondary">Sincronizar</ActionButton>
-                    <ActionButton onClick={handleCreateExperience} icon={Plus}>Nueva Misión</ActionButton>
+                    <ActionButton onClick={handleCreateExperience} icon={Plus}>Nueva Experiencia</ActionButton>
                   </div>
                 </div>
 

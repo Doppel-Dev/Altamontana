@@ -106,14 +106,16 @@ const ExperienceDetail = () => {
                 {/* Main Feature Carousel Container */}
                 <div className="mb-16 relative group">
                   <Carousel options={{ loop: true }}>
-                    <SliderContainer className={`aspect-video overflow-hidden ${isDark ? 'bg-white/5' : 'bg-slate-50'}`}>
+                    <SliderContainer className={`aspect-square md:aspect-video lg:aspect-[16/10] overflow-hidden rounded-2xl ${isDark ? 'bg-neutral-900' : 'bg-slate-100'}`}>
                       {experienceImages.map((src, index) => (
                         <Slider key={index} className="w-full h-full">
-                          <img 
-                            src={getImageUrl(src)} 
-                            className="w-full h-full object-cover transition-transform duration-1000" 
-                            alt={`${experience.title} ${index + 1}`} 
-                          />
+                          <div className="w-full h-full relative">
+                            <img 
+                              src={getImageUrl(src)} 
+                              className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105" 
+                              alt={`${experience.title} ${index + 1}`} 
+                            />
+                          </div>
                         </Slider>
                       ))}
                     </SliderContainer>
@@ -126,16 +128,10 @@ const ExperienceDetail = () => {
                       <ChevronRight size={24} />
                     </SliderNextButton>
                     
-                    <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 ${isDark ? 'text-[#ff6b00]' : 'text-white'}`}>
+                    <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 ${isDark ? 'text-[#ff6b00]' : 'text-[#003366]'}`}>
                       <SliderDotButton />
                     </div>
                   </Carousel>
-
-                  {/* Decorative Elements */}
-                  <div className="absolute top-6 right-6 flex flex-col gap-2 z-20 pointer-events-none">
-                    <div className="w-12 h-[2px] bg-white mix-blend-difference" />
-                    <div className="w-8 h-[2px] bg-white mix-blend-difference self-end" />
-                  </div>
                 </div>
 
                 {/* Narrative Description */}
@@ -152,7 +148,7 @@ const ExperienceDetail = () => {
                 <div className="mb-24">
                   <div className="flex items-center gap-4 mb-10">
                     <div className={`w-10 h-[1px] ${isDark ? 'bg-[#ff6b00]' : 'bg-[#003366]'}`} />
-                    <span className="text-xs font-black uppercase tracking-[0.3em] opacity-60">MISSION BRIEFING</span>
+                    <span className="text-xs font-black uppercase tracking-[0.3em] opacity-60">EXPERIENCE BRIEFING</span>
                   </div>
 
                   <div className={`relative overflow-hidden ${isDark ? 'bg-white/5 border border-white/5' : 'bg-[#fafafa] border border-slate-100'}`}>

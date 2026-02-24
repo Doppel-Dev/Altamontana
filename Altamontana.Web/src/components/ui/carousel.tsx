@@ -97,7 +97,7 @@ export const SliderContainer = ({
   const { emblaRef } = useCarousel();
   return (
     <div className={cn('overflow-hidden', className)} ref={emblaRef}>
-      <div className='flex'>{children}</div>
+      <div className='flex h-full'>{children}</div>
     </div>
   );
 };

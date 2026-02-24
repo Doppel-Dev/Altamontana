@@ -86,7 +86,7 @@ const Experiences = () => {
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2 opacity-40">
                   <LayoutGrid size={16} />
-                  <span className="text-[10px] font-black uppercase tracking-widest">MISSION SELECTION</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest">EXPERIENCE SELECTION</span>
                 </div>
                 <div className="h-4 w-[1px] bg-current opacity-10" />
                 <span className="text-[10px] font-mono opacity-40">{experiences.length} AVAILABLE</span>
