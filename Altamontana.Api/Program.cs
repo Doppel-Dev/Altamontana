@@ -80,7 +80,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Mensaje de bienvenida en la raíz para evitar el 404
-app.MapGet("/", () => "Altamontana API is running. Visit /swagger for documentation.");
+app.MapGet("/", () => "Alta Montaña API is running. Visit /swagger for documentation.");
 
 // Ensure database is created
 using (var scope = app.Services.CreateScope())
