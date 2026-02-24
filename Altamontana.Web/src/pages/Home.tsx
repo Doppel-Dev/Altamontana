@@ -119,7 +119,7 @@ const Home = () => {
               transition={{ delay: 0.2, duration: 1 }}
               className="text-white text-[10px] sm:text-xs font-bold uppercase mb-6 tracking-[0.4em]"
             >
-              {isDark ? t('aviationDivision') : t('mountainExperiences')}
+              {t(isDark ? content.home_hero_eyebrow_dark : content.home_hero_eyebrow_light) || (isDark ? t('aviationDivision') : t('mountainExperiences'))}
             </motion.p>
 
             {/* Main Title */}
