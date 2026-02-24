@@ -65,7 +65,18 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAll");
 
-app.UseStaticFiles(); // Habilita servir archivos desde wwwroot
+app.UseStaticFiles(); // Para archivos internos si existieran
+
+// Servir archivos desde el Volumen persistente
+var uploadsPath = "/app/data/uploads";
+if (!Directory.Exists(uploadsPath)) Directory.CreateDirectory(uploadsPath);
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(uploadsPath),
+    RequestPath = "/uploads"
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
@@ -77,7 +88,19 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<AppDbContext>();
-        // context.Database.EnsureDeleted(); // Commented out to persist admin changes
+        
+        // Extraer la ruta del directorio de la cadena de conexión para crearla si no existe
+        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        if (connectionString != null && connectionString.StartsWith("Data Source="))
+        {
+            var dbPath = connectionString.Replace("Data Source=", "");
+            var directory = Path.GetDirectoryName(dbPath);
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+        }
+
         context.Database.EnsureCreated();
     }
     catch (Exception ex)

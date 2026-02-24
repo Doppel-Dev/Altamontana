@@ -75,8 +75,8 @@ public class ExperiencesController : ControllerBase
 
         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
         
-        // Creamos la ruta física absoluta a wwwroot/uploads
-        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+        // Usamos una ruta absoluta fuera de la app para persistencia real
+        var uploadsFolder = "/app/data/uploads";
         if (!Directory.Exists(uploadsFolder))
         {
             Directory.CreateDirectory(uploadsFolder);
