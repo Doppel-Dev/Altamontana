@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Experience, Booking } from '../types';
 
-// Using HTTP port to avoid certificate issues in local development
-const API_URL = 'http://localhost:5146/api'; 
+// Using environment variable for API URL, defaulting to local for dev
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5146/api'; 
 
 const api = axios.create({
     baseURL: API_URL,
